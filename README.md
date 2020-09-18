@@ -1,7 +1,9 @@
 # openpose-docker
 A docker build file for CMU openpose with Python API support
 
-https://hub.docker.com/r/cwaffles/openpose
+![Docker Automated build](https://img.shields.io/docker/automated/revolutionarystrider/openpose-docker)
+
+https://hub.docker.com/repository/docker/revolutionarystrider/openpose-docker
 
 ### Requirements
 - Nvidia Docker runtime: https://github.com/NVIDIA/nvidia-docker#quickstart
