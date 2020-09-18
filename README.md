@@ -2,6 +2,7 @@
 A docker build file for CMU openpose with Python API support
 
 ![Docker Automated build](https://img.shields.io/docker/automated/revolutionarystrider/openpose-docker)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prakashsellathurai/openpose-docker/Docker)
 
 https://hub.docker.com/repository/docker/revolutionarystrider/openpose-docker
 
