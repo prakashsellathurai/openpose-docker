@@ -1,41 +1,19 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn5-devel   
+# start with the nvidia container for cuda 8 with cudnn 5
 
-RUN echo "Installing dependencies..." && \
-	apt-get -y --no-install-recommends update && \
-	apt-get -y --no-install-recommends upgrade && \
-	apt-get install -y --no-install-recommends \
-	build-essential \
-	cmake \
-	git \
-	libatlas-base-dev \
-	libprotobuf-dev \
-	libleveldb-dev \
-	libsnappy-dev \
-	libhdf5-serial-dev \
-	protobuf-compiler \
-	libboost-all-dev \
-	libgflags-dev \
-	libgoogle-glog-dev \
-	liblmdb-dev \
-	pciutils \
-	python3-setuptools \
-	python3-dev \
-	python3-pip \
-	opencl-headers \
-	ocl-icd-opencl-dev \
-	libviennacl-dev \
-	libcanberra-gtk-module \
-	libopencv-dev && \
-	python3 -m pip install \
-	numpy \
-	protobuf \
-	opencv-python
+LABEL maintainer "Prakash Sellathurai <prakashsellathurai@gmail.com>"
 
-RUN echo "Downloading and building OpenPose..." && \
-	git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git && \
-	mkdir -p /openpose/build && \
-	cd /openpose/build && \
-	cmake .. && \
-	make -j`nproc`
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install wget unzip lsof apt-utils lsb-core -y
+RUN apt-get install libatlas-base-dev -y
+RUN apt-get install libopencv-dev python-opencv python-pip -y   
 
-WORKDIR /openpose
+RUN wget https://github.com/CMU-Perceptual-Computing-Lab/openpose/archive/master.zip; \
+    unzip master.zip; rm master.zip
+
+WORKDIR openpose-master
+RUN sed -i 's/\<sudo chmod +x $1\>//g' ubuntu/install_caffe_and_openpose_if_cuda8.sh; \
+    sed -i 's/\<sudo chmod +x $1\>//g' ubuntu/install_openpose_if_cuda8.sh; \
+    sed -i 's/\<sudo -H\>//g' 3rdparty/caffe/install_caffe_if_cuda8.sh; \
+    sed -i 's/\<sudo\>//g' 3rdparty/caffe/install_caffe_if_cuda8.sh; \
+    sync; sleep 1; ./ubuntu/install_caffe_and_openpose_if_cuda8.sh
