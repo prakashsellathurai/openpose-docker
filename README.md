@@ -1,5 +1,5 @@
 # openpose-docker
-A docker build file for CMU openpose with Python API support
+A docker build file for CMU openpose with Python 3 API support
 
 ![Docker Automated build](https://img.shields.io/docker/automated/revolutionarystrider/openpose-docker)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prakashsellathurai/openpose-docker/Docker)
